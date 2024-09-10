@@ -41,30 +41,7 @@
   margin-right: 20px; /* Add margin to right section */
 }
 
-/* Search Input */
-.navbar-search {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px 10px;
-  background-color: #f9f9f9;
-}
-
-.navbar-search input {
-  border: none;
-  outline: none;
-  padding: 5px;
-  font-size: 16px;
-  background-color: transparent;
-}
-
-.navbar-search button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
+/* Cart Icon */
 .navbar-search-icon {
   position: relative;
 }
@@ -147,10 +124,6 @@
     gap: 20px;
   }
 
-  .navbar-search input {
-    width: 120px;
-  }
-
   .navbar-right img {
     width: 20px;
   }
@@ -165,17 +138,8 @@
     gap: 15px;
   }
 
-  .navbar-search input {
-    width: 100px;
-  }
-
   .navbar-right img {
     width: 18px;
-  }
-
-  .navbar-right button {
-    padding: 7px 15px;
-    font-size: 14px;
   }
 }
 
@@ -186,10 +150,6 @@
 
   .navbar-right {
     gap: 10px;
-  }
-
-  .navbar-search input {
-    width: 80px;
   }
 
   .navbar-right img {

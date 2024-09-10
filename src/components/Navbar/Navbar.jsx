@@ -7,13 +7,8 @@ import { StoreContext } from "../../context/StoreContext";
 const Navbar = () => {
   const [menu, setMenu] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
-  const [searchQuery, setSearchQuery] = useState(""); // State for search input
 
   const { getTotalCartAmount } = useContext(StoreContext);
-
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
 
   return (
     <>
@@ -77,23 +72,10 @@ const Navbar = () => {
         </ul>
 
         <div className="navbar-right">
-          {/* Search Input */}
-          <div className="navbar-search">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-            <button type="button">
-              <img src={assets.search_icon} alt="Search" />
-            </button>
-          </div>
-
           {/* Cart Icon */}
           <div className="navbar-search-icon">
             <Link to="/cart">
-              <img src={assets.basket_icon} alt="" />
+              <img src={assets.basket_icon} alt="Cart" />
             </Link>
             <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
           </div>
