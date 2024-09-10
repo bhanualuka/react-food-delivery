@@ -1,43 +1,32 @@
 .navbar {
-  padding: 20px 0px;
+  padding: 20px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-.navbar .logo {
-  font-size: 35px;
-  /* width: 150px; */
-  color: rgb(221, 111, 28);
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.navbar .logo {
+  font-size: 35px;
+  color: rgb(221, 111, 28);
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  margin-left: 20px; /* Add margin to logo */
+}
+
+/* Navbar Menu Links */
 .navbar-menu {
   display: flex;
   list-style: none;
-  gap: 20px;
+  gap: 30px; /* Add space between the links */
   color: #49557e;
   font-size: 18px;
 }
-.navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
 
-.navbar button {
-  background: transparent;
-  font-size: 16px;
+.navbar-menu a {
+  text-decoration: none;
   color: #49557e;
-  border: 1px solid tomato;
-  padding: 10px 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.navbar button:hover {
-  background-color: #fff4f2;
+  padding: 0 10px; /* Add some padding around the links */
 }
 
 .navbar .active {
@@ -45,7 +34,34 @@
   border-bottom: 2px solid #49557e;
 }
 
-.navbar li {
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-right: 20px; /* Add margin to right section */
+}
+
+/* Search Input */
+.navbar-search {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 10px;
+  background-color: #f9f9f9;
+}
+
+.navbar-search input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 16px;
+  background-color: transparent;
+}
+
+.navbar-search button {
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 }
 
@@ -58,57 +74,125 @@
   min-width: 10px;
   min-height: 10px;
   background-color: tomato;
-  border-radius: 5px;
+  border-radius: 50%;
   top: -8px;
   right: -8px;
 }
 
-@media (max-width: 1050px) {
-  .navbar h1 {
-    /* font-size: 50px; */
-    font-size: 20px;
-  }
-  .navbar-menu {
-    gap: 20px;
-    font-size: 17px;
-  }
-  .navbar-right {
-    gap: 30px;
-  }
-
-  .navbar-right img {
-    width: 22px;
-  }
-
-  .navbar-right button {
-    padding: 8px 25px;
-  }
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
 }
 
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: #49557e;
+  transition: 0.3s ease;
+}
+
+/* Hamburger Open State */
+.hamburger.open .line:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+
+.hamburger.open .line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .line:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* Mobile Menu Open */
+.navbar-menu.open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 1;
+}
+
+/* Mobile Menu Links */
+.navbar-menu a {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  color: #49557e;
+}
+
+/* Media Queries */
 @media (max-width: 900px) {
-  .navbar h1 {
-    font-size: 10px;
-  }
   .navbar-menu {
-    gap: 15px;
-    font-size: 16px;
+    display: none; /* Hidden by default */
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    top: 70px;
+    flex-direction: column;
   }
+
+  .hamburger {
+    display: flex; /* Display hamburger in smaller screens */
+  }
+
   .navbar-right {
     gap: 20px;
+  }
+
+  .navbar-search input {
+    width: 120px;
   }
 
   .navbar-right img {
     width: 20px;
   }
+}
+
+@media (max-width: 600px) {
+  .navbar .logo {
+    font-size: 20px;
+  }
+
+  .navbar-right {
+    gap: 15px;
+  }
+
+  .navbar-search input {
+    width: 100px;
+  }
+
+  .navbar-right img {
+    width: 18px;
+  }
 
   .navbar-right button {
-    padding: 7px 20px;
-    font-size: 15px;
+    padding: 7px 15px;
+    font-size: 14px;
   }
 }
 
-@media (max-width: 750px) {
-  .navbar-menu {
-    display: none;
+@media (max-width: 450px) {
+  .navbar .logo {
+    font-size: 18px;
+  }
+
+  .navbar-right {
+    gap: 10px;
+  }
+
+  .navbar-search input {
+    width: 80px;
+  }
+
+  .navbar-right img {
+    width: 15px;
   }
 }
