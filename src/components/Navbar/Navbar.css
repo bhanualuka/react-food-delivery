@@ -12,6 +12,7 @@
   color: rgb(221, 111, 28);
   font-family: "Trebuchet MS", Arial, sans-serif;
   margin-left: 20px; /* Add margin to logo */
+  border-bottom: none;
 }
 
 /* Navbar Menu Links */

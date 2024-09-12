@@ -15,7 +15,19 @@ const StoreContextProvider = (props) => {
   };
 
   const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    if (cartItems[itemId] > 1) {
+      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    } else {
+      removeItemCompletely(itemId);
+    }
+  };
+
+  const removeItemCompletely = (itemId) => {
+    setCartItems((prev) => {
+      const updatedCart = { ...prev };
+      delete updatedCart[itemId];
+      return updatedCart;
+    });
   };
 
   const getTotalCartAmount = () => {
@@ -26,7 +38,6 @@ const StoreContextProvider = (props) => {
         totalAmount += itemInfo.price * cartItems[item];
       }
     }
-
     return totalAmount;
   };
 
@@ -36,6 +47,7 @@ const StoreContextProvider = (props) => {
     setCartItems,
     addToCart,
     removeFromCart,
+    removeItemCompletely,
     getTotalCartAmount,
   };
 

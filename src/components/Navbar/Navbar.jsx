@@ -49,7 +49,7 @@ const Navbar = () => {
           >
             menu
           </a>
-          <a
+          {/*  <a
             href="#app-download"
             onClick={() => {
               setMenu("mobile-app");
@@ -58,7 +58,7 @@ const Navbar = () => {
             className={menu === "mobile-app" ? "active" : ""}
           >
             mobile-app
-          </a>
+          </a> */}
           <a
             href="#footer"
             onClick={() => {

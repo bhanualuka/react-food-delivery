@@ -1,58 +1,47 @@
 .header {
-  height: 34vw;
-  margin: 30px auto;
-  background: url("/public/header_img.png") no-repeat;
-  background-size: contain;
-  position: relative;
-}
-
-.header-contents {
-  position: absolute;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: start;
-  gap: 1.5vw;
-  max-width: 50%;
-  bottom: 10%;
-  left: 6vw;
-  animation: fadeIn 3s;
+  justify-content: center;
 }
 
-.header-contents h2 {
-  font-weight: 500;
-  color: white;
-  font-size: max(4.5vw, 22px);
+.carousel-image {
+  border-radius: 15px;
+  width: 100%;
+  height: 450px; /* Default height for larger screens */
+  object-fit: cover; /* Ensures the images maintain aspect ratio and fill the space */
 }
 
-.header-contents p {
-  color: white;
-  font-size: 1vw;
+.carousel {
+  width: 90%; /* Adjusts the size of the carousel */
 }
 
-.header-contents button {
-  border: none;
-  color: #747474;
-  font-weight: 500;
-  padding: 1vw 2.3vw;
-  background-color: white;
-  font-size: max(1vw, 13px);
-  border-radius: 50px;
-}
-
-@media (max-width: 1050px) {
-  .header-contents {
-    max-width: 45%;
+/* Media queries for smaller screens */
+@media (max-width: 1024px) {
+  .carousel-image {
+    height: 350px; /* Adjust height for tablets */
   }
 }
 
-@media (max-width: 750px) {
-  .header-contents {
-    max-width: 65%;
+@media (max-width: 768px) {
+  .carousel-image {
+    height: 250px; /* Adjust height for mobile devices */
   }
-  .header-contents p {
-    display: none;
+}
+
+@media (max-width: 480px) {
+  .carousel-image {
+    height: 200px; /* Further adjust height for very small screens */
   }
-  .header-contents button {
-    padding: 2vw 4vw;
-  }
+}
+
+.header img {
+  border-radius: 15px; /* Adds a border radius to the images */
+}
+
+/* Additional styles to make the carousel indicators hidden */
+.carousel-indicators [data-bs-target] {
+  border-radius: 100%;
+  width: 2px;
+  height: 2px;
+  display: none;
 }

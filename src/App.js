@@ -6,6 +6,12 @@ import Home from "./pages/Home/Home";
 import Cart from "./pages/Cart/Cart";
 import Footer from "./components/Foter/Footer";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
+import FoodDetailPage from "./components/FoodDetails/FoodDetail";
+// import Header from "./components/Header/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Header from "./components/Header/Header";
+import Payment from "./pages/Payment/Payment";
+import ExploreMenu from "./components/ExploreMenu/ExploreMenu";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -29,9 +35,13 @@ function App() {
 
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
+        {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/food/:id" element={<FoodDetailPage />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/exploremenu" element={<ExploreMenu />} />
         </Routes>
       </div>
       <Footer />
