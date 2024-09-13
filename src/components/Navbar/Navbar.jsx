@@ -40,7 +40,7 @@ const Navbar = () => {
             home
           </Link>
           <a
-            href="#explore-menu"
+            href="/menupage"
             onClick={() => {
               setMenu("menu");
               setIsMenuOpen(false);

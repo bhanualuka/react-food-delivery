@@ -15,6 +15,10 @@
   width: 90%; /* Adjusts the size of the carousel */
 }
 
+.carousel-control-next-icon {
+  display: none;
+}
+
 /* Media queries for smaller screens */
 @media (max-width: 1024px) {
   .carousel-image {
@@ -41,7 +45,6 @@
 /* Additional styles to make the carousel indicators hidden */
 .carousel-indicators [data-bs-target] {
   border-radius: 100%;
-  width: 2px;
-  height: 2px;
-  display: none;
+  width: 10px;
+  height: 10px;
 }

@@ -11,7 +11,7 @@
   font-size: 35px;
   color: rgb(221, 111, 28);
   font-family: "Trebuchet MS", Arial, sans-serif;
-  margin-left: 20px; /* Add margin to logo */
+  margin-left: 20px; 
   border-bottom: none;
 }
 
@@ -19,27 +19,27 @@
 .navbar-menu {
   display: flex;
   list-style: none;
-  gap: 30px; /* Add space between the links */
+  gap: 30px; 
   color: #49557e;
   font-size: 18px;
 }
 
 .navbar-menu a {
-  text-decoration: none;
+  text-decoration: none; 
   color: #49557e;
-  padding: 0 10px; /* Add some padding around the links */
+  padding: 0 10px; 
+  border-bottom: none; 
 }
 
 .navbar .active {
   padding-bottom: 2px;
-  border-bottom: 2px solid #49557e;
-}
+  text-decoration: none; }
 
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 40px;
-  margin-right: 20px; /* Add margin to right section */
+  margin-right: 20px; 
 }
 
 /* Cart Icon */
@@ -108,7 +108,7 @@
 /* Media Queries */
 @media (max-width: 900px) {
   .navbar-menu {
-    display: none; /* Hidden by default */
+    display: none; 
     position: absolute;
     left: 0;
     right: 0;
@@ -118,7 +118,7 @@
   }
 
   .hamburger {
-    display: flex; /* Display hamburger in smaller screens */
+    display: flex; 
   }
 
   .navbar-right {

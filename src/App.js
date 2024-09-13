@@ -9,9 +9,9 @@ import LoginPopup from "./components/LoginPopup/LoginPopup";
 import FoodDetailPage from "./components/FoodDetails/FoodDetail";
 // import Header from "./components/Header/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header from "./components/Header/Header";
 import Payment from "./pages/Payment/Payment";
 import ExploreMenu from "./components/ExploreMenu/ExploreMenu";
+import MenuPage from "./pages/Payment/ExploreMenuPage/MenuPage";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -42,6 +42,7 @@ function App() {
           <Route path="/food/:id" element={<FoodDetailPage />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/exploremenu" element={<ExploreMenu />} />
+          <Route path="/menupage" element={<MenuPage />} />
         </Routes>
       </div>
       <Footer />
