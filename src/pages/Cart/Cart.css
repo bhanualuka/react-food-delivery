@@ -191,8 +191,6 @@
 }
 
 /* Media Queries for responsiveness */
-
-/* Adjust quantity button positioning for smaller screens */
 @media screen and (max-width: 768px) {
   .cart-buttons {
     position: static;
@@ -202,5 +200,59 @@
   .cart-items-title,
   .cart-items-item {
     grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr 0.5fr;
+  }
+
+  .cart-items-item img {
+    width: 40px;
+    height: auto;
+  }
+
+  .cart-items-title .price,
+  .cart-items-item .price {
+    font-size: 14px;
+  }
+
+  .quantity-btn {
+    width: 25px;
+    height: 25px;
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  .quantity-number {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cart-items-title,
+  .cart-items-item {
+    grid-template-columns: 1fr 1.2fr 1fr 1fr 1fr 0.5fr;
+  }
+
+  .cart-items-item img {
+    width: 30px;
+    height: auto;
+  }
+
+  .cart-items-title .price,
+  .cart-items-item .price {
+    font-size: 12px;
+  }
+
+  .quantity-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    padding: 3px;
+  }
+
+  .quantity-number {
+    font-size: 12px;
+  }
+
+  .cart-promocode-input button {
+    padding: 8px;
+    font-size: 12px;
   }
 }
