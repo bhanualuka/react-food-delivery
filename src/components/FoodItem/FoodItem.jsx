@@ -17,35 +17,12 @@ const FoodItem = ({ id, name, price, description, image }) => {
   return (
     <div className="food-item" onClick={handleItemClick}>
       <div className="food-item-img-container">
-        <img className="food-item-img" src={image} alt={name} />
-        {!cartItems[id] ? (
-          <img
-            className="add"
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent navigation when clicking on the cart icon
-              addToCart(id);
-            }}
-            src={assets.add_icon_white}
-            alt="Add to Cart"
-          />
-        ) : (
-          <div
-            className="food-item-counter"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              onClick={() => removeFromCart(id)}
-              src={assets.remove_icon_red}
-              alt="Remove from Cart"
-            />
-            <p>{cartItems[id]}</p>
-            <img
-              onClick={() => addToCart(id)}
-              src={assets.add_icon_green}
-              alt="Add More"
-            />
-          </div>
-        )}
+        <img
+          className="food-item-img"
+          src={image}
+          alt={name}
+          onClick={() => addToCart(id)}
+        />
       </div>
 
       <div className="food-item-info">

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import { assets } from "../../assets/assets";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,7 +9,9 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-content-left">
           {/* <img src={assets.logo} alt="" /> */}
-          <h1>Saimaster.</h1>
+          <Link to={"/"}>
+            <h1>Saimaster.</h1>
+          </Link>
           <p>
             A simple and easy-to-use food delivery app made with React.js.
             Explore a variety of dishes and order your favorite meals with just

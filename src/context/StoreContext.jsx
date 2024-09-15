@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { food_list } from "../assets/assets";
 
 export const StoreContext = createContext(null);
@@ -6,6 +6,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
 
+  // Add item to cart
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
@@ -14,6 +15,7 @@ const StoreContextProvider = (props) => {
     }
   };
 
+  // Remove item from cart
   const removeFromCart = (itemId) => {
     if (cartItems[itemId] > 1) {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
@@ -22,6 +24,7 @@ const StoreContextProvider = (props) => {
     }
   };
 
+  // Remove item completely from cart
   const removeItemCompletely = (itemId) => {
     setCartItems((prev) => {
       const updatedCart = { ...prev };
@@ -30,6 +33,7 @@ const StoreContextProvider = (props) => {
     });
   };
 
+  // Calculate total cart amount
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
@@ -41,6 +45,11 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
+  // New function to count unique items in the cart
+  const getUniqueCartCount = () => {
+    return Object.keys(cartItems).length;
+  };
+
   const contextValue = {
     food_list,
     cartItems,
@@ -49,6 +58,7 @@ const StoreContextProvider = (props) => {
     removeFromCart,
     removeItemCompletely,
     getTotalCartAmount,
+    getUniqueCartCount,
   };
 
   return (

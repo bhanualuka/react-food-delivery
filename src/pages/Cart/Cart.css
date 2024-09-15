@@ -142,54 +142,6 @@
   background-color: #ff0000;
 }
 
-/* Promo Code Section */
-.cart-promocode {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.cart-promocode p {
-  color: #555;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.cart-promocode-input {
-  margin-top: 15px;
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
-  border-radius: 6px;
-  padding: 5px;
-}
-
-.cart-promocode-input input {
-  background: transparent;
-  border: none;
-  outline: none;
-  padding-left: 10px;
-  flex: 1;
-  font-size: 16px;
-  color: #333;
-}
-
-.cart-promocode-input button {
-  width: auto;
-  padding: 12px 20px;
-  background-color: #333;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.cart-promocode-input button:hover {
-  background-color: #555;
-}
-
 /* Media Queries for responsiveness */
 @media screen and (max-width: 768px) {
   .cart-buttons {

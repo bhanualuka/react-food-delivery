@@ -54,7 +54,7 @@ const FoodDetailPage = () => {
           {/* Proceed to Payment Button */}
           <div className="proceed-to-cart">
             <button className="proceed-btn" onClick={handleProceedToPayment}>
-              Proceed to Payment
+              Go To Cart
             </button>
           </div>
         </div>

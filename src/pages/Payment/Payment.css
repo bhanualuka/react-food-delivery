@@ -1,28 +1,46 @@
+/* Container Styling */
+.payment-page {
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  padding: 50px 0; /* Add some padding at the top and bottom */
+}
+
 .payment-container {
-  max-width: 600px;
-  margin: 100px auto;
+  display: flex;
+  justify-content: flex-end; /* Form is aligned to the right */
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
   padding: 30px;
-  background: linear-gradient(145deg, #f0f4f8, #d9e6f2);
+  background: url("/public/CardOffer.jpg") no-repeat center center; /* Added background image */
+  background-size: cover; /* Ensures the image covers the entire container */
   border-radius: 12px;
   border: 2px solid rgba(0, 123, 255, 0.2); /* Light blue border for a soft touch */
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  position: relative;
-  bottom: 25px;
   text-align: center;
+  min-height: 500px; /* Set a minimum height for the container */
 }
 
-.payment-container h2 {
-  font-size: 32px;
-  color: #333;
-  margin-bottom: 30px;
-  font-weight: bold;
-}
-
-/* Form Styling */
+/* Real-time Border on Right-Side Form */
 .payment-form {
+  max-width: 500px; /* Limit the width of the form */
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-left: auto; /* Push the form to the right */
+  padding: 20px;
+  border: 2px solid rgba(0, 123, 255, 0.5); /* Real-time right-side border */
+  border-radius: 10px; /* Rounded corners */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.95
+  ); /* Semi-transparent white background */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow for a realistic effect */
+  backdrop-filter: blur(5px); /* Add slight blur to make the form stand out */
+  text-align: left; /* Align text to the left */
 }
 
 .form-group {
@@ -52,7 +70,13 @@
 
 .form-group-inline {
   display: flex;
+  justify-content: space-between;
   gap: 20px;
+}
+
+.form-group-inline .form-group {
+  flex: 1;
+  min-width: 0;
 }
 
 /* Button Styling */
@@ -66,12 +90,13 @@
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .payment-btn:hover {
   background-color: #0056b3;
   box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+  transform: translateY(-2px); /* Adds a small hover effect */
 }
 
 /* Modal Popup Styling */
@@ -92,7 +117,8 @@
   padding: 40px;
   border-radius: 12px;
   text-align: center;
-  width: 450px;
+  width: 90%;
+  max-width: 450px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -136,10 +162,28 @@ p {
   background-color: #e60000;
 }
 
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
-  .form-group-inline {
+  .payment-page {
+    flex-direction: column; /* Stack the image and form vertically */
+    align-items: center; /* Center the content */
+  }
+
+  .payment-container {
     flex-direction: column;
+    align-items: center;
+  }
+
+  .payment-form {
+    margin-left: 0; /* Remove left margin for smaller screens */
+    border: 1px solid rgba(0, 123, 255, 0.5); /* Thinner border for smaller screens */
   }
 
   .modal-content {
