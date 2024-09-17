@@ -142,7 +142,6 @@
   background-color: #ff0000;
 }
 
-/* Media Queries for responsiveness */
 @media screen and (max-width: 768px) {
   .cart-buttons {
     position: static;
@@ -182,6 +181,18 @@
     grid-template-columns: 1fr 1.2fr 1fr 1fr 1fr 0.5fr;
   }
 
+  .titleName {
+    font-size: 13px;
+  }
+  .priceName {
+    font-size: 15px;
+    position: relative;
+    left: 5px;
+  }
+
+  .totalPrice {
+    font-size: 15px;
+  }
   .cart-items-item img {
     width: 30px;
     height: auto;
@@ -197,10 +208,18 @@
     height: 20px;
     font-size: 10px;
     padding: 3px;
+    position: relative;
+    right: 7px;
   }
 
   .quantity-number {
     font-size: 12px;
+    position: relative;
+    right: 7px;
+  }
+  #incremantButton {
+    position: relative;
+    bottom: 10px;
   }
 
   .cart-promocode-input button {

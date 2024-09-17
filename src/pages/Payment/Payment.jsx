@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Payment.css";
+import { useLocation } from "react-router-dom";
 
 const Payment = () => {
+  const { state } = useLocation();
+  const [totalAmount, setTotalAmount] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
     cardNumber: "",
@@ -13,10 +16,16 @@ const Payment = () => {
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
 
+  useEffect(() => {
+    if (state && state.totalAmount) {
+      setTotalAmount(state.totalAmount + 2); // Add delivery fee if applicable
+    }
+  }, [state]);
+
   const validateForm = () => {
     const newErrors = {};
 
-    // Name validation (letters and spaces only)
+    // Name validation
     const nameRegex = /^[A-Za-z\s]+$/;
     if (!nameRegex.test(formData.name)) {
       newErrors.name = "Name should contain only letters and spaces.";
@@ -33,13 +42,13 @@ const Payment = () => {
         "Card number must be 16 digits, formatted as '1234 5678 1234 5678'.";
     }
 
-    // Expiry validation (MM/YY format)
+    // Expiry validation
     const expiryRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
     if (!expiryRegex.test(formData.expiry)) {
       newErrors.expiry = "Expiry must be in MM/YY format.";
     }
 
-    // CVV validation (exactly 3 digits)
+    // CVV validation
     const cvvRegex = /^\d{3}$/;
     if (!cvvRegex.test(formData.cvv)) {
       newErrors.cvv = "CVV must be exactly 3 digits.";
@@ -52,27 +61,64 @@ const Payment = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      setShowModal(true);
-
-      // Reset form data
-      setFormData({
-        name: "",
-        cardNumber: "",
-        expiry: "",
-        cvv: "",
-        address: "",
-      });
+      displayRazorpay();
     }
+  };
+
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  const displayRazorpay = async () => {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const options = {
+      key: "rzp_test_t39ikL4S4xXpRt",
+      currency: "INR",
+      amount: totalAmount * 100, // Convert amount to paise
+      name: formData.name, // Use the name entered by the user
+      description: "Test Transaction",
+      handler: function (response) {
+        alert(
+          "Payment Successful! Payment ID: " + response.razorpay_payment_id
+        );
+        setShowModal(true); // Show success modal
+      },
+      prefill: {
+        name: formData.name,
+        email: "yourname@example.com", // You can add form data for email
+        contact: "9999999999", // Add user contact number if available
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
   };
 
   const handleChange = (e) => {
     const { id, value } = e.target;
 
-    // Format card number to include spaces every 4 digits
     if (id === "cardNumber") {
       const formattedValue = value
-        .replace(/\s+/g, "") // Remove existing spaces
-        .replace(/(\d{4})(?=\d)/g, "$1 "); // Add space after every 4 digits
+        .replace(/\s+/g, "")
+        .replace(/(\d{4})(?=\d)/g, "$1 ");
       setFormData({ ...formData, [id]: formattedValue });
     } else {
       setFormData({ ...formData, [id]: value });
@@ -81,13 +127,19 @@ const Payment = () => {
 
   const closeModal = () => {
     setShowModal(false);
+    // Reset form data after the modal is closed
+    setFormData({
+      name: "",
+      cardNumber: "",
+      expiry: "",
+      cvv: "",
+      address: "",
+    });
   };
 
   return (
     <div className="payment-page">
       <div className="payment-container">
-        <div className="paymentFrom"></div>
-
         <form className="payment-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name on Card</label>
@@ -109,71 +161,64 @@ const Payment = () => {
               id="cardNumber"
               value={formData.cardNumber}
               onChange={handleChange}
-              placeholder="Format : 1234 5678 1234 5678"
+              placeholder="1234 5678 1234 5678"
               required
             />
             {errors.cardNumber && <p className="error">{errors.cardNumber}</p>}
           </div>
 
-          <div className="form-group-inline">
-            <div className="form-group">
-              <label htmlFor="expiry">Expiry Date</label>
-              <input
-                type="text"
-                id="expiry"
-                value={formData.expiry}
-                onChange={handleChange}
-                placeholder="MM/YY"
-                required
-              />
-              {errors.expiry && <p className="error">{errors.expiry}</p>}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="cvv">CVV</label>
-              <input
-                type="text"
-                id="cvv"
-                value={formData.cvv}
-                onChange={handleChange}
-                placeholder="CVV"
-                required
-              />
-              {errors.cvv && <p className="error">{errors.cvv}</p>}
-            </div>
+          <div className="form-group">
+            <label htmlFor="expiry">Expiry Date</label>
+            <input
+              type="text"
+              id="expiry"
+              value={formData.expiry}
+              onChange={handleChange}
+              placeholder="MM/YY"
+              required
+            />
+            {errors.expiry && <p className="error">{errors.expiry}</p>}
           </div>
 
           <div className="form-group">
-            <label htmlFor="address">Billing Address</label>
+            <label htmlFor="cvv">CVV</label>
             <input
               type="text"
+              id="cvv"
+              value={formData.cvv}
+              onChange={handleChange}
+              placeholder="CVV"
+              required
+            />
+            {errors.cvv && <p className="error">{errors.cvv}</p>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="address">Address</label>
+            <textarea
               id="address"
               value={formData.address}
               onChange={handleChange}
-              placeholder="Enter your billing address"
+              placeholder="Enter your address"
               required
             />
           </div>
-          <button type="submit" className="payment-btn">
-            Pay Now
+
+          <button type="submit" className="pay-button">
+            Pay &#8377; {totalAmount}
           </button>
         </form>
-
-        {showModal && (
-          <div className="modal-overlay">
-            <div className="modal-content">
-              <div className="modal-header">
-                <span className="checkmark">&#10003;</span>
-                <h3>Order Successful!</h3>
-              </div>
-              <p>Your order has been successfully placed.</p>
-              <button onClick={closeModal} className="close-btn">
-                Close
-              </button>
-            </div>
-          </div>
-        )}
       </div>
+
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Payment Successful</h2>
+            <p>Your payment was processed successfully.</p>
+            <button onClick={closeModal}>Close</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

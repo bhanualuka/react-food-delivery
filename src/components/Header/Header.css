@@ -7,42 +7,40 @@
 .carousel-image {
   border-radius: 15px;
   width: 100%;
-  height: 450px; /* Default height for larger screens */
-  object-fit: cover; /* Ensures the images maintain aspect ratio and fill the space */
+  height: 450px;
+  object-fit: cover;
 }
 
 .carousel {
-  width: 90%; /* Adjusts the size of the carousel */
+  width: 90%;
 }
 
 .carousel-control-next-icon {
   display: none;
 }
 
-/* Media queries for smaller screens */
 @media (max-width: 1024px) {
   .carousel-image {
-    height: 350px; /* Adjust height for tablets */
+    height: 350px;
   }
 }
 
 @media (max-width: 768px) {
   .carousel-image {
-    height: 250px; /* Adjust height for mobile devices */
+    height: 250px;
   }
 }
 
 @media (max-width: 480px) {
   .carousel-image {
-    height: 200px; /* Further adjust height for very small screens */
+    height: 200px;
   }
 }
 
 .header img {
-  border-radius: 15px; /* Adds a border radius to the images */
+  border-radius: 15px;
 }
 
-/* Additional styles to make the carousel indicators hidden */
 .carousel-indicators [data-bs-target] {
   border-radius: 100%;
   width: 10px;

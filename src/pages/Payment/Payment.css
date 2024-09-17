@@ -1,46 +1,40 @@
 /* Container Styling */
 .payment-page {
   display: flex;
-  justify-content: center; /* Center the content horizontally */
-  padding: 50px 0; /* Add some padding at the top and bottom */
+  justify-content: center;
+  padding: 50px 0;
 }
 
 .payment-container {
   display: flex;
-  justify-content: flex-end; /* Form is aligned to the right */
+  justify-content: flex-end;
   align-items: center;
   max-width: 1200px;
   width: 100%;
   padding: 30px;
-  background: url("/public/CardOffer.jpg") no-repeat center center; /* Added background image */
-  background-size: cover; /* Ensures the image covers the entire container */
+  background: url("/public/CardOffer.jpg") no-repeat center center;
+  background-size: cover;
   border-radius: 12px;
-  border: 2px solid rgba(0, 123, 255, 0.2); /* Light blue border for a soft touch */
+  border: 2px solid rgba(0, 123, 255, 0.2);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   text-align: center;
-  min-height: 500px; /* Set a minimum height for the container */
+  min-height: 500px;
 }
 
-/* Real-time Border on Right-Side Form */
 .payment-form {
-  max-width: 500px; /* Limit the width of the form */
+  max-width: 500px;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-left: auto; /* Push the form to the right */
+  margin-left: auto;
   padding: 20px;
-  border: 2px solid rgba(0, 123, 255, 0.5); /* Real-time right-side border */
-  border-radius: 10px; /* Rounded corners */
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.95
-  ); /* Semi-transparent white background */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow for a realistic effect */
-  backdrop-filter: blur(5px); /* Add slight blur to make the form stand out */
-  text-align: left; /* Align text to the left */
+  border: 2px solid rgba(0, 123, 255, 0.5);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  text-align: left;
 }
 
 .form-group {
@@ -54,7 +48,8 @@
   margin-bottom: 8px;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea {
   padding: 12px;
   font-size: 16px;
   border: 2px solid #ccc;
@@ -63,24 +58,20 @@
   background-color: #f7fafc;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group textarea:focus {
   border-color: #007bff;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
 
-.form-group-inline {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
-.form-group-inline .form-group {
-  flex: 1;
-  min-width: 0;
-}
-
-/* Button Styling */
-.payment-btn {
+/* Pay Button Styling */
+.pay-button {
   width: 100%;
   padding: 15px;
   background-color: #007bff;
@@ -90,13 +81,20 @@
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.payment-btn:hover {
+.pay-button:hover {
   background-color: #0056b3;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
-  transform: translateY(-2px); /* Adds a small hover effect */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.pay-button:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }
 
 /* Modal Popup Styling */
@@ -106,7 +104,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,66 +112,47 @@
 
 .modal-content {
   background-color: #fff;
-  padding: 40px;
+  padding: 30px;
   border-radius: 12px;
   text-align: center;
   width: 90%;
-  max-width: 450px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
 }
 
-.modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.modal-content h2 {
+  font-size: 28px;
+  color: #28a745;
   margin-bottom: 20px;
 }
 
-.checkmark {
-  font-size: 50px;
-  color: green;
-  margin-right: 15px;
-}
-
-h3 {
-  font-size: 24px;
-  color: #333;
-  font-weight: bold;
-}
-
-p {
+.modal-content p {
   font-size: 18px;
-  color: #555;
+  color: #333;
+  margin-bottom: 30px;
 }
 
-.close-btn {
-  margin-top: 25px;
-  padding: 12px 30px;
-  background-color: #ff4d4f;
-  color: #fff;
+.modal-content button {
+  padding: 12px 25px;
+  background-color: #007bff;
+  color: white;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.close-btn:hover {
-  background-color: #e60000;
-}
-
-/* Error message styling */
-.error {
-  color: red;
-  font-size: 14px;
-  margin-top: 5px;
+.modal-content button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .payment-page {
-    flex-direction: column; /* Stack the image and form vertically */
-    align-items: center; /* Center the content */
+    flex-direction: column;
+    align-items: center;
   }
 
   .payment-container {
@@ -182,11 +161,13 @@ p {
   }
 
   .payment-form {
-    margin-left: 0; /* Remove left margin for smaller screens */
-    border: 1px solid rgba(0, 123, 255, 0.5); /* Thinner border for smaller screens */
+    margin-left: 0;
+    border: 1px solid rgba(0, 123, 255, 0.5);
+    padding: 15px;
   }
 
   .modal-content {
     width: 90%;
+    padding: 20px;
   }
 }

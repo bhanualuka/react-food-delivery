@@ -6,7 +6,7 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
 
-  // Add item to cart
+  // Adding item to cart
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
@@ -15,7 +15,7 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  // Remove item from cart
+  // Removing item from cart
   const removeFromCart = (itemId) => {
     if (cartItems[itemId] > 1) {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
@@ -24,7 +24,7 @@ const StoreContextProvider = (props) => {
     }
   };
 
-  // Remove item completely from cart
+  // Removing item completely from cart
   const removeItemCompletely = (itemId) => {
     setCartItems((prev) => {
       const updatedCart = { ...prev };
@@ -33,7 +33,7 @@ const StoreContextProvider = (props) => {
     });
   };
 
-  // Calculate total cart amount
+  // Calculating total cart amount
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
@@ -45,9 +45,9 @@ const StoreContextProvider = (props) => {
     return totalAmount;
   };
 
-  // New function to count unique items in the cart
+  //  To count unique items in the cart
   const getUniqueCartCount = () => {
-    return Object.keys(cartItems).length;
+    return Object.keys(cartItems).length; // using object.keys
   };
 
   const contextValue = {

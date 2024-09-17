@@ -10,7 +10,6 @@ const FoodItem = ({ id, name, price, description, image }) => {
   const navigate = useNavigate();
 
   const handleItemClick = () => {
-    // Navigate to the detail page for the clicked food item
     navigate(`/food/${id}`);
   };
 
@@ -32,7 +31,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
         </div>
 
         <p className="food-item-desc">{description}</p>
-        <p className="food-item-price">${price}</p>
+        <p className="food-item-price"> &#8377; {price}</p>
       </div>
     </div>
   );

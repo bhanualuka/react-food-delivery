@@ -14,8 +14,6 @@ import ExploreMenu from "./components/ExploreMenu/ExploreMenu";
 import MenuPage from "./pages/Payment/ExploreMenuPage/MenuPage";
 
 function App() {
-  const [showLogin, setShowLogin] = useState(false);
-
   return (
     <>
       {/* <div className="jaisaimasterjaibapujimaharaj">
@@ -31,10 +29,8 @@ function App() {
         </h1>
       </div> */}
 
-      {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : <></>}
-
       <div className="app">
-        <Navbar setShowLogin={setShowLogin} />
+        <Navbar />
         {/* <Header /> */}
         <Routes>
           <Route path="/" element={<Home />} />

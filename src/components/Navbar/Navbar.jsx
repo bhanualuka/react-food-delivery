@@ -70,7 +70,7 @@ const Navbar = () => {
             <img src={assets.basket_icon} alt="Cart" />
             {/* <BsCart4 /> */}
           </Link>
-          {/* Displaying  count of unique items in the cart */}
+          {/* Displaying  count of unique items on the cart logo */}
           <div className={getUniqueCartCount() === 0 ? "" : "dot"}>
             {getUniqueCartCount() > 0 && <span>{getUniqueCartCount()}</span>}
           </div>

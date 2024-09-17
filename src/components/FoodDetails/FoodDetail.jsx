@@ -4,22 +4,20 @@ import { StoreContext } from "../../context/StoreContext";
 import "./FoodDetails.css";
 
 const FoodDetailPage = () => {
-  const { id } = useParams(); // Get food ID from URL
+  const { id } = useParams();
   const { food_list, cartItems, addToCart, removeFromCart } =
     useContext(StoreContext);
 
-  const navigate = useNavigate(); // Hook for programmatic navigation
+  const navigate = useNavigate();
 
-  // Find the selected food item from the context (or fetch if you have an API)
   const selectedFood = food_list.find((item) => item._id === id);
 
   if (!selectedFood) {
     return <div>Food item not found</div>;
   }
 
-  // Handler for "Proceed to Payment" button
   const handleProceedToPayment = () => {
-    navigate("/cart"); // Navigate to the Cart page
+    navigate("/cart");
   };
 
   return (
@@ -31,9 +29,11 @@ const FoodDetailPage = () => {
         <div className="food-info">
           <h2>{selectedFood.name}</h2>
           <p>{selectedFood.description}</p>
-          <p>Price: ${selectedFood.price}</p>
+          <p>
+            Price: &#8377;
+            {selectedFood.price}
+          </p>
 
-          {/* Increment-Decrement Buttons */}
           <div className="increment-decrement-buttons">
             <button
               className="quantity-btn"
@@ -51,7 +51,6 @@ const FoodDetailPage = () => {
             </button>
           </div>
 
-          {/* Proceed to Payment Button */}
           <div className="proceed-to-cart">
             <button className="proceed-btn" onClick={handleProceedToPayment}>
               Go To Cart

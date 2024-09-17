@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,6 +15,12 @@ const Cart = () => {
   } = useContext(StoreContext);
 
   const navigate = useNavigate(); // Initialize useNavigate to handle navigation
+
+  const handleProceedToPayment = () => {
+    const totalAmount = getTotalCartAmount();
+    const cartItemsList = food_list.filter((item) => cartItems[item._id] > 0);
+    navigate("/payment", { state: { totalAmount, cartItemsList } }); // Pass cart items list and total amount via state
+  };
 
   return (
     <div className="cart">
@@ -38,8 +44,8 @@ const Cart = () => {
                   <Link to={`/food/${item._id}`}>
                     <img src={item.image} alt={item.name} />
                   </Link>
-                  <p>{item.name}</p>
-                  <p>${item.price}</p>
+                  <p className="titleName">{item.name}</p>
+                  <p className="priceName">${item.price}</p>
 
                   <div className="cart-buttons">
                     <div className="cart-item-quantity">
@@ -52,6 +58,7 @@ const Cart = () => {
                       <p className="quantity-number">{cartItems[item._id]}</p>
                       <button
                         className="quantity-btn"
+                        id="incremantButton"
                         onClick={() => addToCart(item._id)}
                       >
                         +
@@ -59,7 +66,9 @@ const Cart = () => {
                     </div>
                   </div>
 
-                  <p>${item.price * cartItems[item._id]}</p>
+                  <p className="totalPrice">
+                    ${item.price * cartItems[item._id]}
+                  </p>
                   <p
                     onClick={() => removeItemCompletely(item._id)}
                     className="cross"
@@ -99,7 +108,7 @@ const Cart = () => {
           {/* Navigation to Payment Page */}
           <button
             className="proceedToPayment"
-            onClick={() => navigate("/payment")}
+            onClick={handleProceedToPayment} // Call handler function
           >
             PROCEED TO PAYMENT
           </button>
