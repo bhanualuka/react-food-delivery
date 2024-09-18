@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="footer-content-left">
           {/* <img src={assets.logo} alt="" /> */}
           <Link to={"/"}>
-            <h1>Saimaster.</h1>
+            <h1>Saimaster</h1>
           </Link>
           <p>
             A simple and easy-to-use food delivery app made with React.js.

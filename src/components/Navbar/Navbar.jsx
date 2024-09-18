@@ -14,7 +14,7 @@ const Navbar = () => {
     <div className="navbar">
       <Link to="/">
         <div className="logo-Container">
-          <h1 className="logo">Saimaster.</h1>
+          <h1 className="logo">Saimaster</h1>
         </div>
       </Link>
 
