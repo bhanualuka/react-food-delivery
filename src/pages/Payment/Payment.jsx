@@ -3,7 +3,7 @@ import "./Payment.css";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
-import { Toast, Button, Row, Col } from "react-bootstrap";
+import { Toast } from "react-bootstrap";
 
 const Payment = () => {
   const { state } = useLocation();
@@ -23,7 +23,7 @@ const Payment = () => {
 
   useEffect(() => {
     if (state && state.totalAmount) {
-      setTotalAmount(state.totalAmount + 2); // Add delivery fee if applicable
+      setTotalAmount(state.totalAmount + 2); 
     }
   }, [state]);
 

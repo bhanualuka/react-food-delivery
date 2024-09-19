@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
 import "./FoodDetails.css";
@@ -8,7 +8,7 @@ const FoodDetailPage = () => {
   const { food_list, cartItems, addToCart, removeFromCart } =
     useContext(StoreContext);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
 
   const selectedFood = food_list.find((item) => item._id === id);
 

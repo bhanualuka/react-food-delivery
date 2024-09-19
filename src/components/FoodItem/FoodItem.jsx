@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 // import "./FoodItem.css";
 import "./Fooditem.css";
