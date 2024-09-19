@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Payment.css";
 import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { StoreContext } from "../../context/StoreContext";
+import { Toast, Button, Row, Col } from "react-bootstrap";
 
 const Payment = () => {
   const { state } = useLocation();
+  const { clearCart, cartItems } = useContext(StoreContext);
   const [totalAmount, setTotalAmount] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
@@ -11,10 +15,11 @@ const Payment = () => {
     expiry: "",
     cvv: "",
     address: "",
+    mobileNumber: "",
   });
-
   const [errors, setErrors] = useState({});
-  const [showModal, setShowModal] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const [paymentId, setPaymentId] = useState("");
 
   useEffect(() => {
     if (state && state.totalAmount) {
@@ -54,6 +59,11 @@ const Payment = () => {
       newErrors.cvv = "CVV must be exactly 3 digits.";
     }
 
+    // Mobile validation
+    const mobileNumberRegex = /^\d{10}$/;
+    if (!mobileNumberRegex.test(formData.mobileNumber)) {
+      newErrors.mobileNumber = "Mobile number should be exactly 10 digits.";
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -92,19 +102,19 @@ const Payment = () => {
     const options = {
       key: "rzp_test_t39ikL4S4xXpRt",
       currency: "INR",
-      amount: totalAmount * 100, // Convert amount to paise
-      name: formData.name, // Use the name entered by the user
+      amount: totalAmount * 100,
+      name: formData.name,
       description: "Test Transaction",
       handler: function (response) {
-        alert(
-          "Payment Successful! Payment ID: " + response.razorpay_payment_id
-        );
-        setShowModal(true); // Show success modal
+        setPaymentId(response.razorpay_payment_id); // Store payment ID
+        setShowToast(true); // Show success toast
+        clearCart();
+        setTotalAmount(0);
       },
       prefill: {
         name: formData.name,
-        email: "yourname@example.com", // You can add form data for email
-        contact: "9999999999", // Add user contact number if available
+        email: "alukabhanuprakash@gmail.com",
+        contact: formData.mobileNumber,
       },
     };
 
@@ -125,15 +135,16 @@ const Payment = () => {
     }
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-    // Reset form data after the modal is closed
+  const closeToast = () => {
+    setShowToast(false);
+    // Reseting form data after the toast is closed
     setFormData({
       name: "",
       cardNumber: "",
       expiry: "",
       cvv: "",
       address: "",
+      mobileNumber: "",
     });
   };
 
@@ -194,6 +205,22 @@ const Payment = () => {
           </div>
 
           <div className="form-group">
+            <label htmlFor="mobileNumber">Mobile Number</label>
+            <input
+              type="tel"
+              name="mobileNumber"
+              id="mobileNumber"
+              placeholder="Enter your number"
+              value={formData.mobileNumber}
+              onChange={handleChange}
+              required
+            />
+            {errors.mobileNumber && (
+              <p className="error">{errors.mobileNumber}</p>
+            )}
+          </div>
+
+          <div className="form-group">
             <label htmlFor="address">Address</label>
             <textarea
               id="address"
@@ -205,18 +232,32 @@ const Payment = () => {
           </div>
 
           <button type="submit" className="pay-button">
-            Pay &#8377; {totalAmount}
+            {cartItems && Object.keys(cartItems).length === 0
+              ? "Buy Items to Pay"
+              : `Pay ₹ ${totalAmount}`}
           </button>
+
+          {/*   <button type="submit" className="pay-button">
+            Pay &#8377; {totalAmount}
+          </button> */}
         </form>
       </div>
 
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Payment Successful</h2>
-            <p>Your payment was processed successfully.</p>
-            <button onClick={closeModal}>Close</button>
-          </div>
+      {showToast && (
+        <div className="toast-container">
+          <Toast className="toast-custom" show={showToast} onClose={closeToast}>
+            <Toast.Header>
+              <strong className="me-auto">Payment Successful</strong>
+              <small>Just now</small>
+            </Toast.Header>
+            <Toast.Body>
+              <h5> Your payment was processed successfully.</h5>
+              <h6>
+                Payment ID:
+                <span style={{ color: "whitesmoke" }}>{paymentId}</span>
+              </h6>
+            </Toast.Body>
+          </Toast>
         </div>
       )}
     </div>

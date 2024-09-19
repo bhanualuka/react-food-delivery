@@ -107,12 +107,15 @@ const Cart = () => {
             </div>
           </div>
           {/* Navigation to Payment Page */}
+
+          {/* <Link to="/payment"> */}
           <button
             className="proceedToPayment"
             onClick={handleProceedToPayment} // Call handler function
           >
             PROCEED TO PAYMENT
           </button>
+          {/* </Link> */}
         </div>
       </div>
     </div>

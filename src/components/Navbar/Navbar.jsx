@@ -38,7 +38,7 @@ const Navbar = () => {
           }}
           className={menu === "home" ? "active" : ""}
         >
-          home
+          HOME
         </Link>
 
         <Link
@@ -49,7 +49,7 @@ const Navbar = () => {
           }}
           className={menu === "menu" ? "active" : ""}
         >
-          menu
+          MENU
         </Link>
         <a
           href="#footer"
@@ -59,7 +59,7 @@ const Navbar = () => {
           }}
           className={menu === "contact-us" ? "active" : ""}
         >
-          contact-us
+          CONTACT-US
         </a>
       </ul>
 

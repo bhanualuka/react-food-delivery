@@ -4,9 +4,14 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate for naviga
 import "./Fooditem.css";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/StoreContext";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const FoodItem = ({ id, name, price, description, image }) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
+
+  // const uniquFoodItem = useParams();
+
   const navigate = useNavigate();
 
   const handleItemClick = () => {
@@ -14,8 +19,8 @@ const FoodItem = ({ id, name, price, description, image }) => {
   };
 
   return (
-    <div className="food-item" onClick={handleItemClick}>
-      <div className="food-item-img-container">
+    <div className="food-item">
+      <div className="food-item-img-container" onClick={handleItemClick}>
         <img
           className="food-item-img"
           src={image}

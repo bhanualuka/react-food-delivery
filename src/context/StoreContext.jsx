@@ -50,6 +50,11 @@ const StoreContextProvider = (props) => {
     return Object.keys(cartItems).length; // using object.keys
   };
 
+  // clearing the cart items after completing the payment
+  const clearCart = () => {
+    setCartItems({});
+  };
+
   const contextValue = {
     food_list,
     cartItems,
@@ -59,6 +64,7 @@ const StoreContextProvider = (props) => {
     removeItemCompletely,
     getTotalCartAmount,
     getUniqueCartCount,
+    clearCart,
   };
 
   return (
