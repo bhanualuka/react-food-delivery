@@ -47,7 +47,7 @@ const StoreContextProvider = (props) => {
 
   //  To count unique items in the cart
   const getUniqueCartCount = () => {
-    return Object.keys(cartItems).length; // using object.keys
+    return Object.keys(cartItems).length; 
   };
 
   // clearing the cart items after completing the payment

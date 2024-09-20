@@ -22,7 +22,7 @@ const Scroll = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Use requestAnimationFrame for immediate effect
+    // Using requestAnimationFrame for immediate effect
     const scrollToTop = () => window.scrollTo(0, 0);
 
     // Request animation frame to ensure the scroll happens after the browser has repainted

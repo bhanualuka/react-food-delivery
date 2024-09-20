@@ -8,7 +8,7 @@ const FoodDetailPage = () => {
   const { food_list, cartItems, addToCart, removeFromCart } =
     useContext(StoreContext);
 
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const selectedFood = food_list.find((item) => item._id === id);
 
@@ -29,20 +29,19 @@ const FoodDetailPage = () => {
         <div className="food-info">
           <h2>{selectedFood.name}</h2>
           <p>{selectedFood.description}</p>
-          <p>
+          <p className="price">
             Price: &#8377;
             {selectedFood.price}
           </p>
 
           <div className="increment-decrement-buttons">
             <button
-              className="quantity-btn"
-              id="decrement-btn"
+              className="decrement-btn"
               onClick={() => removeFromCart(selectedFood._id)}
             >
               -
             </button>
-            <span>Quantity: {cartItems[selectedFood._id] || 0}</span>
+            <span> {cartItems[selectedFood._id] || 0}</span>
             <button
               className="increment-btn"
               onClick={() => addToCart(selectedFood._id)}

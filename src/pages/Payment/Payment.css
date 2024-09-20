@@ -154,7 +154,7 @@
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1050; /* Ensure the toast is above other elements */
+  z-index: 1050; 
 }
 
 .toast-custom {
@@ -163,9 +163,8 @@
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
   font-size: 18px;
-  padding: 20px; /* Increased padding for a more spacious look */
-  width: 600px; /* Increased width */
-  max-width: 90%; /* Ensure responsiveness */
+  padding: 20px; 
+  width: 600px; 
   height: 180px;
 }
 
@@ -173,28 +172,28 @@
   background-color: #218838;
   color: white;
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-  font-size: 20px; /* Increased font size */
-  padding: 10px 15px; /* Added padding for the header */
+  font-size: 20px; 
+  padding: 10px 15px; 
 }
 
 .toast-custom .toast-body {
   background-color: #28a745;
   color: white;
-  font-size: 18px; /* Increased font size for body */
-  padding: 10px 15px; /* Added padding for the body */
+  font-size: 18px; 
+  padding: 10px 15px; 
 }
 
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .toast-custom {
     width: 90%;
-    font-size: 16px; /* Adjust font size for smaller screens */
-    padding: 15px; /* Adjust padding for smaller screens */
+    font-size: 16px; 
+    padding: 15px; 
   }
 
   .toast-custom .toast-header,
   .toast-custom .toast-body {
-    padding: 10px; /* Adjust padding for header and body on smaller screens */
+    padding: 10px; 
   }
 }
 

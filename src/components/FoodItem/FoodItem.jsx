@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate } from "react-router-dom"; 
 // import "./FoodItem.css";
 import "./Fooditem.css";
 import { assets } from "../../assets/assets";
@@ -25,7 +25,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
           className="food-item-img"
           src={image}
           alt={name}
-          onClick={() => addToCart(id)}
+    /*       onClick={() => addToCart(id)} */
         />
       </div>
 

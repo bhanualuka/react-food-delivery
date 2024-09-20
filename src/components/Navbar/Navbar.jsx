@@ -3,13 +3,13 @@ import "./Navbar.css";
 import { assets } from "../../assets/assets";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../../context/StoreContext";
-import { BsCart4 } from "react-icons/bs";
 
 const Navbar = () => {
   const [menu, setMenu] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State for hamburger menu
 
-  const { getUniqueCartCount } = useContext(StoreContext); // unique count function
+  const { getUniqueCartCount } = useContext(StoreContext);
+
   return (
     <div className="navbar">
       <Link to="/">
@@ -36,7 +36,7 @@ const Navbar = () => {
             setMenu("home");
             setIsMenuOpen(false);
           }}
-          className={menu === "home" ? "active" : ""}
+          className="hoverLinks"
         >
           HOME
         </Link>
@@ -47,7 +47,7 @@ const Navbar = () => {
             setMenu("menu");
             setIsMenuOpen(false);
           }}
-          className={menu === "menu" ? "active" : ""}
+          className="hoverLinks"
         >
           MENU
         </Link>
@@ -57,7 +57,7 @@ const Navbar = () => {
             setMenu("contact-us");
             setIsMenuOpen(false);
           }}
-          className={menu === "contact-us" ? "active" : ""}
+          className="hoverLinks"
         >
           CONTACT-US
         </a>

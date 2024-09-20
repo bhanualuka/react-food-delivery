@@ -23,7 +23,7 @@ const Payment = () => {
 
   useEffect(() => {
     if (state && state.totalAmount) {
-      setTotalAmount(state.totalAmount + 2); 
+      setTotalAmount(state.totalAmount + 2);
     }
   }, [state]);
 
@@ -32,38 +32,49 @@ const Payment = () => {
 
     // Name validation
     const nameRegex = /^[A-Za-z\s]+$/;
-    if (!nameRegex.test(formData.name)) {
+    if (!formData.name) {
+      newErrors.name = "Name is required.";
+    } else if (!nameRegex.test(formData.name)) {
       newErrors.name = "Name should contain only letters and spaces.";
     }
 
-    // Card number validation (exactly 16 digits with spaces between every 4 digits)
-    const cardNumberRegex = /^(\d{4} \d{4} \d{4} \d{4})$/;
+    // Card number validation (16 digits, format 1234 5678 1234 5678)
     const cleanedCardNumber = formData.cardNumber.replace(/\s+/g, "");
-    if (
-      !cardNumberRegex.test(formData.cardNumber) ||
-      cleanedCardNumber.length !== 16
-    ) {
-      newErrors.cardNumber =
-        "Card number must be 16 digits, formatted as '1234 5678 1234 5678'.";
+    if (!formData.cardNumber) {
+      newErrors.cardNumber = "Card number is required.";
+    } else if (cleanedCardNumber.length !== 16) {
+      newErrors.cardNumber = "Card number must be exactly 16 digits.";
     }
 
     // Expiry validation
     const expiryRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
-    if (!expiryRegex.test(formData.expiry)) {
+    if (!formData.expiry) {
+      newErrors.expiry = "Expiry date is required.";
+    } else if (!expiryRegex.test(formData.expiry)) {
       newErrors.expiry = "Expiry must be in MM/YY format.";
     }
 
     // CVV validation
     const cvvRegex = /^\d{3}$/;
-    if (!cvvRegex.test(formData.cvv)) {
+    if (!formData.cvv) {
+      newErrors.cvv = "CVV is required.";
+    } else if (!cvvRegex.test(formData.cvv)) {
       newErrors.cvv = "CVV must be exactly 3 digits.";
     }
 
     // Mobile validation
     const mobileNumberRegex = /^\d{10}$/;
-    if (!mobileNumberRegex.test(formData.mobileNumber)) {
+    if (!formData.mobileNumber) {
+      newErrors.mobileNumber = "Mobile number is required.";
+    } else if (!mobileNumberRegex.test(formData.mobileNumber)) {
       newErrors.mobileNumber = "Mobile number should be exactly 10 digits.";
     }
+
+    // Address validation
+    if (!formData.address) {
+      newErrors.address = "Address is required.";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -106,8 +117,8 @@ const Payment = () => {
       name: formData.name,
       description: "Test Transaction",
       handler: function (response) {
-        setPaymentId(response.razorpay_payment_id); // Store payment ID
-        setShowToast(true); // Show success toast
+        setPaymentId(response.razorpay_payment_id);
+        setShowToast(true);
         clearCart();
         setTotalAmount(0);
       },
@@ -122,22 +133,55 @@ const Payment = () => {
     paymentObject.open();
   };
 
+  // Real-time validation for inputs
   const handleChange = (e) => {
     const { id, value } = e.target;
+    let newErrors = { ...errors };
 
     if (id === "cardNumber") {
-      const formattedValue = value
-        .replace(/\s+/g, "")
-        .replace(/(\d{4})(?=\d)/g, "$1 ");
+      const cleanedValue = value.replace(/\s+/g, "").slice(0, 16); // Limit to 16 digits by using slice methos
+      const formattedValue = cleanedValue.replace(/(\d{4})(?=\d)/g, "$1 ");
       setFormData({ ...formData, [id]: formattedValue });
+
+      // Validate immediately
+      if (cleanedValue.length < 16) {
+        newErrors.cardNumber = "Card number must be exactly 16 digits.";
+      } else {
+        delete newErrors.cardNumber;
+      }
+    } else if (id === "cvv") {
+      const cleanedCvv = value.replace(/\D/g, "").slice(0, 3);
+      setFormData({ ...formData, [id]: cleanedCvv });
+
+      // Validate immediately
+      if (cleanedCvv.length < 3) {
+        newErrors.cvv = "CVV must be exactly 3 digits.";
+      } else {
+        delete newErrors.cvv;
+      }
+    } else if (id === "mobileNumber") {
+      const cleanedValue = value.replace(/\D/g, "").slice(0, 10); // removing non-numeric values
+      if (cleanedValue.length < 10) {
+        newErrors.mobileNumber = "Mobile number should be exactly 10 digits.";
+      } else {
+        delete newErrors.mobileNumber;
+      }
+      setFormData({ ...formData, [id]: cleanedValue });
+    } else if (id === "expiry") {
+      const formattedExpiry = value
+        .replace(/\D/g, "")
+        .replace(/(\d{2})(\d{2})/, "$1/$2")
+        .slice(0, 5);
+      setFormData({ ...formData, [id]: formattedExpiry });
     } else {
       setFormData({ ...formData, [id]: value });
     }
+
+    setErrors(newErrors);
   };
 
   const closeToast = () => {
     setShowToast(false);
-    // Reseting form data after the toast is closed
     setFormData({
       name: "",
       cardNumber: "",
@@ -208,11 +252,10 @@ const Payment = () => {
             <label htmlFor="mobileNumber">Mobile Number</label>
             <input
               type="tel"
-              name="mobileNumber"
               id="mobileNumber"
-              placeholder="Enter your number"
               value={formData.mobileNumber}
               onChange={handleChange}
+              placeholder="Enter your number"
               required
             />
             {errors.mobileNumber && (
@@ -229,6 +272,7 @@ const Payment = () => {
               placeholder="Enter your address"
               required
             />
+            {errors.address && <p className="error">{errors.address}</p>}
           </div>
 
           <button type="submit" className="pay-button">
@@ -236,10 +280,6 @@ const Payment = () => {
               ? "Buy Items to Pay"
               : `Pay ₹ ${totalAmount}`}
           </button>
-
-          {/*   <button type="submit" className="pay-button">
-            Pay &#8377; {totalAmount}
-          </button> */}
         </form>
       </div>
 
