@@ -45,8 +45,8 @@ const Cart = () => {
                       className="item-image-mobile"
                     />
                     <div className="item-details-mobile">
-                      <p>{item.name}</p>
-                      <p>Price: &#8377; {item.price}</p>
+                      <p className="name">{item.name}</p>
+                      <p className="price">Price: &#8377; {item.price}</p>
                       <div className="mobile-cart-buttons">
                         <button
                           className="decremant"
@@ -62,7 +62,9 @@ const Cart = () => {
                           +
                         </button>
                       </div>
-                      <p>Total: &#8377; {item.price * cartItems[item._id]}</p>
+                      <p className="total">
+                        Total: &#8377; {item.price * cartItems[item._id]}
+                      </p>
                       <Button
                         variant="danger"
                         className="removeItem"
